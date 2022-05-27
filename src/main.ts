@@ -1,6 +1,6 @@
+import newrelic from 'newrelic';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import newrelic from './newrelic';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 /**
  * New Relic agent configuration.
  *
@@ -10,13 +10,33 @@ exports.config = {
    * Array of application names.
    */
   app_name: ['nest-demo'],
+  /**
+   * Your New Relic license key.
+   */
+  license_key: 'YOUR_LICENSE_KEY',
+  /**
+   * This setting controls distributed tracing.
+   * Distributed tracing lets you see the path that a request takes through your
+   * distributed system. Enabling distributed tracing changes the behavior of some
+   * New Relic features, so carefully consult the transition guide before you enable
+   * this feature: https://docs.newrelic.com/docs/transition-guide-distributed-tracing
+   * Default is true.
+   */
+  distributed_tracing: {
+    /**
+     * Enables/disables distributed tracing.
+     *
+     * @env NEW_RELIC_DISTRIBUTED_TRACING_ENABLED
+     */
+    enabled: true,
+  },
   logging: {
     /**
      * Level at which to log. 'trace' is most useful to New Relic when diagnosing
      * issues with the agent, 'info' and higher will impose the least overhead on
      * production applications.
      */
-    level: 'info'
+    level: 'trace',
   },
   /**
    * When true, all request headers except for those listed in attributes.exclude
@@ -24,14 +44,6 @@ exports.config = {
    * attributes include/exclude lists.
    */
   allow_all_headers: true,
-  application_logging: {
-    forwarding: {
-      /**
-       * Toggles whether the agent gathers log records for sending to New Relic.
-       */
-      enabled: true
-    }
-  },
   attributes: {
     /**
      * Prefix of attributes to exclude from all destinations. Allows * as wildcard
@@ -51,7 +63,7 @@ exports.config = {
       'response.headers.authorization',
       'response.headers.proxyAuthorization',
       'response.headers.setCookie*',
-      'response.headers.x*'
-    ]
-  }
-}
+      'response.headers.x*',
+    ],
+  },
+};
