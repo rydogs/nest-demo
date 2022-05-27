@@ -28,7 +28,7 @@ steps:
       - '--region=$_DEPLOY_REGION'
       - '--quiet'
       - '--update-secrets=NEW_RELIC_LICENSE_KEY=NEW_RELIC_LICENSE_KEY:1'
-      - '--allow-unauthenticate'
+      - '--allow-unauthenticated'
     id: Deploy
     entrypoint: gcloud
 images:
