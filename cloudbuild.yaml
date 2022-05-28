@@ -36,8 +36,8 @@ steps:
       - services
       - add-iam-policy-binding
       - $_SERVICE_NAME
-      - '--member="allUsers"'
-      - '--role="roles/run.invoker"'
+      - '--member=allUsers'
+      - '--role=roles/run.invoker'
       - '--region=$_DEPLOY_REGION'
       - '--quiet'
     id: Expose
