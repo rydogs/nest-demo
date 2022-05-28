@@ -14,14 +14,13 @@ steps:
       - push
       - '$_GCR_HOSTNAME/$PROJECT_ID/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA'
     id: Push
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:387.0.0'
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:slim'
     args:
       - run
       - services
       - update
       - $_SERVICE_NAME
       - '--platform=managed'
-      - '--allow-unauthenticated'
       - '--image=$_GCR_HOSTNAME/$PROJECT_ID/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA'
       - '--port=3000'
       - '--max-instances=1'
@@ -30,6 +29,16 @@ steps:
       - '--quiet'
       - '--update-secrets=NEW_RELIC_LICENSE_KEY=NEW_RELIC_LICENSE_KEY:1'
     id: Deploy
+    entrypoint: gcloud
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:slim'
+    args:
+      - run
+      - services
+      - add-iam-policy-binding
+      - $_SERVICE_NAME
+      - '--member="allUsers"'
+      - '--role="roles/run.invoker"'
+    id: Exmpose
     entrypoint: gcloud
 images:
   - '$_GCR_HOSTNAME/$PROJECT_ID/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA'
