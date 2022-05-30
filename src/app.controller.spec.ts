@@ -16,7 +16,7 @@ describe('AppController', () => {
 
   describe('root', () => {
     it('should return "Hello World!"', () => {
-      expect(appController.getHello("Ryan")).toBe('Hello World! Ryan');
+      expect(appController.getPublishedPosts()).toBe([]);
     });
   });
 });
